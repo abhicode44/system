@@ -1,0 +1,123 @@
+/* register.css */
+
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif
+}
+
+.register-container {
+    width: 450px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.register-container h3 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+span {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #555;
+}
+
+span a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+span a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+span::after {
+    content: '→';
+    display: inline-block;
+    margin-left: 8px;
+    color: #007bff;
+    font-weight: bold;
+}
+
+.admin-secret-key, .form-group {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.role-selection {
+    display: flex;
+    margin-bottom: 20px;
+    justify-content: center; /* Center-aligns the items horizontally */
+    align-items: center;     /* Vertically center-aligns the items */
+    gap: 20px;               /* Adds spacing between the radio button options */
+}
+
+
+.form-group label, .admin-secret-key label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold; /* Make labels more distinct */
+}
+
+.form-group input, .admin-secret-key input {
+    width: 100%;
+    padding: 10px; /* Increased padding for better usability */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; /* Ensures padding does not affect width */
+    font-size: 16px; /* Slightly larger text for readability */
+}
+
+button {
+    width: 100%;
+    padding: 12px; /* Increased padding for better touch target */
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px; /* Match font size with inputs */
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .register-container {
+        padding: 15px;
+        width: 90%;
+        max-width: 350px;
+    }
+}
+
+@media (max-width: 480px) {
+    .register-container {
+        padding: 10px;
+        width: 95%;
+        max-width: 300px;
+    }
+
+    .form-group input, .admin-secret-key input {
+        padding: 12px; /* Adjust for smaller screens */
+    }
+
+    button {
+        padding: 14px; /* Adjust for smaller screens */
+    }
+}
