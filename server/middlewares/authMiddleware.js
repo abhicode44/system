@@ -1,6 +1,7 @@
 const dotenv = require('dotenv');
 const jwt = require('jsonwebtoken');
-dotenv.config();
+require('dotenv').config();
+
 
 exports.validateRegistration = (req, res, next) => {
     const { username, password, role, adminSecretKey } = req.body;

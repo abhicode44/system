@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import TransactionPopup from './TransactionPopup';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import TransactionPopup from './TransactionPopup';
+import { format, parseISO } from 'date-fns';
+
 
 const TransactionPage = () => {
     const [balance, setBalance] = useState(0);
@@ -14,8 +16,11 @@ const TransactionPage = () => {
 
     useEffect(() => {
         const fetchTransactions = async () => {
+            const token = localStorage.getItem('token'); // Retrieve token
             try {
-                const response = await axios.get('http://localhost:5000/api/transactions/all');
+                const response = await axios.get('http://localhost:5000/api/transactions/all', {
+                    headers: { Authorization: `Bearer ${token}` } // Include token in headers
+                });
                 setBalance(response.data.balance || 0);
                 setTransactions(Array.isArray(response.data.transactions) ? response.data.transactions : []);
             } catch (error) {
@@ -47,10 +52,15 @@ const TransactionPage = () => {
             alert("Invalid amount.");
             return;
         }
+        
+        const token = localStorage.getItem('token'); // Retrieve token
+
         try {
             const response = await axios.post('http://localhost:5000/api/transactions/create', {
                 type: popupType,
                 amount: numericAmount
+            }, {
+                headers: { Authorization: `Bearer ${token}` } // Include token in headers
             });
             setBalance(response.data.balance || balance);
             setTransactions([response.data, ...transactions]);
@@ -65,14 +75,44 @@ const TransactionPage = () => {
         }
     };
 
-    const formatDateTime = (date) => {
-        const d = new Date(date);
-        return !isNaN(d.getTime()) ? d.toLocaleString() : 'Invalid Date';
+    const handleDelete = async (transactionId) => {
+        const token = localStorage.getItem('token'); // Retrieve token
+
+        try {
+            await axios.delete(`http://localhost:5000/api/transactions/${transactionId}`, {
+                headers: { Authorization: `Bearer ${token}` } // Include token in headers
+            });
+            const response = await axios.get('http://localhost:5000/api/transactions/all', {
+                headers: { Authorization: `Bearer ${token}` } // Include token in headers
+            });
+            setBalance(response.data.balance || balance);
+            setTransactions(Array.isArray(response.data.transactions) ? response.data.transactions : []);
+        } catch (error) {
+            console.error('Error deleting transaction', error);
+            alert("Failed to delete transaction. Please try again.");
+        }
     };
+
+    
+
+    
+    const TransactionRow = ({ transaction }) => (
+        
+        <tr>
+            <td>{transaction._id}</td>
+            <td>{transaction.type}</td>
+            <td>${transaction.amount ? transaction.amount.toFixed(2) : '0.00'}</td>
+            <td>${transaction.balance ? transaction.balance.toFixed(2) : '0.00'}</td>
+            <td>
+                <button className="button delete" onClick={() => handleDelete(transaction._id)}>Delete</button>
+            </td>
+        </tr>
+    );
 
     return (
         <div className="container">
-            <h2 className="title">Transaction Page</h2>
+            <h2 className="title">Welcome To Transaction Page</h2>
+            
             {loading ? (
                 <p>Loading...</p>
             ) : (
@@ -99,20 +139,17 @@ const TransactionPage = () => {
                         <table className="transaction-table">
                             <thead>
                                 <tr>
-                                    <th>Date & Time</th>
+                                    <th>Transaction ID</th>
+                                    
                                     <th>Type</th>
                                     <th>Amount</th>
                                     <th>Balance</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {transactions.map((transaction) => (
-                                    <tr key={transaction._id}>
-                                        <td>{formatDateTime(transaction.date)}</td>
-                                        <td>{transaction.type}</td>
-                                        <td>${transaction.amount ? transaction.amount.toFixed(2) : '0.00'}</td>
-                                        <td>${transaction.balance ? transaction.balance.toFixed(2) : '0.00'}</td>
-                                    </tr>
+                                {transactions.map(transaction => (
+                                    <TransactionRow key={transaction._id} transaction={transaction} />
                                 ))}
                             </tbody>
                         </table>
@@ -179,6 +216,13 @@ const TransactionPage = () => {
                     background: linear-gradient(45deg, #e53935, #b71c1c);
                     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
                 }
+                .button.delete {
+                    background: linear-gradient(45deg, #ff9800, #f57c00);
+                }
+                .button.delete:hover {
+                    background: linear-gradient(45deg, #fb8c00, #ef6c00);
+                    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+                }
                 .transaction-table {
                     width: 100%;
                     border-collapse: collapse;
@@ -198,6 +242,9 @@ const TransactionPage = () => {
                 }
                 .transaction-table tr:hover {
                     background-color: #e0e0e0;
+                }
+                .date-column {
+                    width: 250px; /* Adjust this width as needed */
                 }
                 .logout-button {
                     display: block;
@@ -220,8 +267,9 @@ const TransactionPage = () => {
                     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
                 }
                 .error-message {
-                    color: #f44336;
+                    color: red;
                     text-align: center;
+                    font-size: 1.2em;
                 }
             `}</style>
         </div>
@@ -229,5 +277,3 @@ const TransactionPage = () => {
 };
 
 export default TransactionPage;
-
-

@@ -1,13 +1,11 @@
 const express = require('express');
-const router = express.Router();
 const userController = require('../controllers/userController');
+const router = express.Router();
 
 // Route to get all users with the role "user"
-router.get('/usersList', userController.getAllUsers);
+router.get('/users', userController.getAllUsers);
 
-router.get('/usersList', (req, res) => {
-    console.log('Route /usersList hit'); // Debugging statement
-    userController.getAllUsers(req, res);
-});
+// Route to get transactions for a specific user by their ID
+router.get('/users/:userId/transactions', userController.getUserTransactions);
 
 module.exports = router;

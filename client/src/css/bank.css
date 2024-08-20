@@ -1,0 +1,22 @@
+/* Custom button styles */
+.btn-custom {
+    background-color: #004080; /* Custom blue color */
+    border-color: #003366; /* Darker blue border */
+  }
+  
+  .btn-custom:hover {
+    background-color: #003366; /* Darker blue on hover */
+    border-color: #002244; /* Even darker blue border on hover */
+  }
+  
+  /* Custom table header color */
+  .thead-custom {
+    background-color: #003366; /* Dark blue */
+    color: #ffffff; /* White text */
+  }
+  
+  /* Custom text color for title */
+  .text-primary {
+    color: #004080; /* Custom blue color */
+  }
+  
