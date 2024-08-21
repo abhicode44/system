@@ -1,5 +1,5 @@
 const User = require('../models/User');
-const Transaction = require('../models/Transaction');
+const Transaction = require('../models/Transaction_model');
 
 // Fetch all users with the role "user"
 exports.getAllUsers = async (req, res) => {
@@ -15,29 +15,10 @@ exports.getAllUsers = async (req, res) => {
 // Fetch all transactions for a specific user with their username and role
 exports.getUserTransactions = async (req, res) => {
     try {
-        const { userId } = req.params;
-
-        // Find the user by ID with role "user"
-        const user = await User.findOne({ _id: userId, role: 'user' }, 'username role');
-
-        if (!user) {
-            return res.status(404).json({ message: 'User not found or not a "user" role' });
-        }
-
-        // Fetch all transactions for the user
+        const userId = req.params.userId;
         const transactions = await Transaction.find({ user: userId });
-
-        if (!transactions.length) {
-            return res.status(404).json({ message: 'No transactions found for this user' });
-        }
-
-        // Respond with the user's username, role, and their transactions
-        res.json({
-            username: user.username,
-            role: user.role,
-            transactions: transactions,
-        });
+        res.json(transactions);
     } catch (error) {
-        res.status(500).json({ message: 'Error fetching transactions', error });
+        res.status(500).json({ message: error.message });
     }
 };

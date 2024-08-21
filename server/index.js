@@ -25,7 +25,7 @@ app.use('/api', authRoutes  );
 app.use('/api/transactions', transactionRoutes);
 
 //Admin Routes for fetching users and transactions
-app.use('/api/admin', userRoutes); 
+app.use('/api/users', userRoutes); 
 
 
 
