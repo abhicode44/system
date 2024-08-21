@@ -3,9 +3,18 @@
 body, html {
     height: 100%;
     margin: 0;
-    font-family: Arial, sans-serif
+    font-family: Arial, sans-serif ;
 }
 
+.register-wrapper{
+    background-image: url('../Assests/register.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .register-container {
     width: 450px;
     margin: auto;

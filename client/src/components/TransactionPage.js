@@ -32,7 +32,7 @@ const TransactionPage = () => {
             }
         };
         fetchTransactions();
-    }, []);
+    }, [transactions]);
 
     const handleDeposit = () => {
         setPopupType('deposit');

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import "../css/register.css"
-import { ToastContainer} from 'react-toastify';
+import "../css/register.css";
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 function Register() {
     const [formData, setFormData] = useState({
         username: '',
@@ -38,83 +39,81 @@ function Register() {
     };
 
     return (
-        <div className="register-container">
-            <form onSubmit={handleSubmit}>
-                <ToastContainer/>
-                <h3>Bank System Registration Form</h3>
-                
-                <div className="role-selection">
-                    Register As
-                    <label>
+        <div className="register-wrapper">
+            <div className="register-container">
+                <form onSubmit={handleSubmit}>
+                    <ToastContainer />
+                    <h3>Bank System Registration Form</h3>
+                    
+                    <div className="role-selection">
+                        Register As
+                        <label>
+                            <input
+                                type="radio"
+                                name="role"
+                                value="user"
+                                checked={formData.role === 'user'}
+                                onChange={handleRoleChange}
+                            />
+                            Customer
+                        </label>
+                        <label>
+                            <input
+                                type="radio"
+                                name="role"
+                                value="admin"
+                                checked={formData.role === 'admin'}
+                                onChange={handleRoleChange}
+                            />
+                            Banker
+                        </label>
+                    </div>
+                    
+                    {formData.role === 'admin' && (
+                        <div className="admin-secret-key">
+                            <label>Admin Secret Key</label>
+                            <input
+                                type="password"
+                                name="adminSecretKey"
+                                placeholder="Admin Secret Key"
+                                value={formData.adminSecretKey}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+                    )}
+                    
+                    <div className="form-group">
+                        <label>Username</label>
                         <input
-                            type="radio"
-                            name="role"
-                            value="user"
-                            checked={formData.role === 'user'}
-                            onChange={handleRoleChange}
-                        />
-                        Customer
-                    </label>
-                    <label>
-                        <input
-                            type="radio"
-                            name="role"
-                            value="admin"
-                            checked={formData.role === 'admin'}
-                            onChange={handleRoleChange}
-                        />
-                        Banker
-                    </label>
-                </div>
-                
-                {formData.role === 'admin' && (
-                    <div className="admin-secret-key">
-                        <label>Admin Secret Key</label>
-                        <input
-                            type="password"
-                            name="adminSecretKey"
-                            placeholder="Admin Secret Key"
-                            value={formData.adminSecretKey}
+                            type="text"
+                            name="username"
+                            placeholder="Username"
+                            value={formData.username}
                             onChange={handleChange}
                             required
                         />
                     </div>
-                )}
-                
-                <div className="form-group">
-                    <label>Username</label>
-                    <input
-                        type="text"
-                        name="username"
-                        placeholder="Username"
-                        value={formData.username}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                
-                <div className="form-group">
-                    <label>Password</label>
-                    <input
-                        type="password"
-                        name="password"
-                        placeholder="Password"
-                        value={formData.password}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
+                    
+                    <div className="form-group">
+                        <label>Password</label>
+                        <input
+                            type="password"
+                            name="password"
+                            placeholder="Password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
 
-                <button type="submit">Register</button>
-            </form>
-            
-            <span>Already Have Account ? <Link to='/'>Login</Link></span>
+                    <button type="submit">Register</button>
+                </form>
+                
+                <span>Already Have Account? <Link to='/'>Login</Link></span>
+            </div>
         </div>
     );
 }
 
 export default Register;
-
-
-
-

@@ -58,8 +58,8 @@ const BankerAccount = () => {
   };
 
   return (
-    <div className="container">
-      <header className="header">
+    <div className="container " >
+      <header className="header" style={headerStyles}>
         <h2 className="title">ADMIN PORTAL</h2>
       </header>
 
@@ -67,7 +67,7 @@ const BankerAccount = () => {
 
       <div className="table-container">
         <div className="table-wrapper">
-          <table className="table">
+          <table className="styled-table">
             <thead>
               <tr>
                 <th>USER ID</th>
@@ -83,7 +83,7 @@ const BankerAccount = () => {
                   <td>{user.username}</td>
                   <td>{user.role || 'N/A'}</td>
                   <td>
-                    <button className="button view" onClick={() => handleUserClick(user)}>
+                    <button className="button view" onClick={() => handleUserClick(user)} style={roundedButtonStyles}>
                       Show Transactions
                     </button>
                   </td>
@@ -104,14 +104,13 @@ const BankerAccount = () => {
             <button onClick={closeModal} style={closeButtonStyles}>X</button>
           </div>
           {userTransactions.length > 0 ? (
-            <table style={tableStyles}>
+            <table className="styled-table">
               <thead>
                 <tr>
-                <th>Date</th>
+                  <th>Date</th>
                   <th>Type</th>
                   <th>Amount</th>
                   <th>Balance</th>
-                  
                 </tr>
               </thead>
               <tbody>
@@ -121,7 +120,6 @@ const BankerAccount = () => {
                     <td>{transaction.type}</td>
                     <td>${transaction.amount.toFixed(2)}</td>
                     <td>${transaction.balance.toFixed(2)}</td>
-                    
                   </tr>
                 ))}
               </tbody>
@@ -131,7 +129,7 @@ const BankerAccount = () => {
           )}
         </Modal>
 
-        <button className="logout-button" onClick={() => navigate("/")}>
+        <button className="logout-button" onClick={() => navigate("/")} style={logoutButtonStyles}>
           Logout
         </button>
       </div>
@@ -167,12 +165,12 @@ const closeButtonStyles = {
   background: '#ff5c5c',
   border: 'none',
   color: '#fff',
-  fontSize: '1rem', // Adjust font size
+  fontSize: '1rem', 
   cursor: 'pointer',
   padding: '5px 10px',
   borderRadius: '50%',
-  width: '30px', // Fixed width
-  height: '30px', // Fixed height to make it circular
+  width: '30px', 
+  height: '30px', 
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -180,14 +178,83 @@ const closeButtonStyles = {
 };
 
 const modalTitleStyles = {
-  fontSize: '1.25rem', // Adjust title font size
+  fontSize: '1.85rem', 
   margin: '0',
 };
 
-const tableStyles = {
-  width: '100%',
-  borderCollapse: 'collapse',
-  marginTop: '10px',
+// Adjusted styles for the button
+const roundedButtonStyles = {
+  borderRadius: '20px', 
+  padding: '5px 10px', 
+  backgroundColor: ' #4B0082',
+  color: '#fff',
+  border: 'none',
+  cursor: 'pointer',
+  transition: 'background-color 0.3s',
+  width: '180px', 
 };
+
+// Adjust header styles to add space
+const headerStyles = {
+  textAlign: 'center', 
+  padding: '20px 0', 
+  marginBottom: '20px', 
+};
+
+// Adjust logout button styles
+const logoutButtonStyles = {
+  width: '100px', 
+  padding: '8px 0',
+  backgroundColor: '#4B0082',
+  color: '#fff',
+  border: 'none',
+  cursor: 'pointer',
+  borderRadius: '5px', 
+};
+
+// Styled table CSS
+const styledTable = `
+  .styled-table {
+    width: 90%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9rem;
+    font-family: 'Arial', sans-serif;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    textAlign: 'center',
+    margin: '0 auto',
+  }
+
+  .styled-table thead tr {
+    background-color: #4B0082;
+    color: #ffffff;
+    text-align: center;
+  }
+
+  .styled-table th,
+  .styled-table td {
+    padding: 12px 15px;
+    text-align: center;
+  }
+
+  .styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+  }
+
+  .styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+  }
+
+  .styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+  }
+
+  .styled-table tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+`;
+
+// Inject the styles into the document
+document.head.insertAdjacentHTML("beforeend", `<style>${styledTable}</style>`);
 
 export default BankerAccount;

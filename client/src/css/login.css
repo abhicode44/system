@@ -1,23 +1,25 @@
-/* login.css */
 
-body {
-    font-family: Arial, sans-serif;
+/* login.css */
+.login-page {
+    background-image: url('../Assests//login.jpg');
     background-size: cover;
-    margin: 0;
-    padding: 0;
+    background-position: center;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
 }
 
 .login-container {
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
     width: 475px;
 }
+
+
+
 
 .login-title {
     text-align: center;
