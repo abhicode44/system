@@ -33,6 +33,20 @@ This project is a comprehensive banking system designed to manage customer and b
    Accounts Page: After logging in, bankers are directed to the Accounts page, which displays an overview of all customer accounts. This page is designed for 
    managing and reviewing customer data.
 
+How To Deploy This Project :-
+
+step 1 :- git clone repository URL on your system 
+
+step 2 :- install Node Module Packages for client and server folder 
+
+step 3 :- Initialize node module pacakges using "npm init -y" command in Backend
+
+step 4 :- Go to .env files and make necessary changes keys and values and make sure your Database URL is connected succesfully 
+
+step 5 :- start the backend with command "node index.js"
+
+step 6 :- frontend client folder give command "npm start"
+
 Website Hosting on Render 
 
 LIVE WEBSITE DEMO :- 
