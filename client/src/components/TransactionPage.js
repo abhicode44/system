@@ -18,7 +18,7 @@ const TransactionPage = () => {
         const fetchTransactions = async () => {
             const token = localStorage.getItem('token'); // Retrieve token
             try {
-                const response = await axios.get('https://system-sq0t.onrender.com/api/transactions/all', {
+                const response = await axios.get('https://system-1wf6.onrender.com/api/transactions/all', {
                     headers: { Authorization: `Bearer ${token}` } // Include token in headers
                 });
                 setBalance(response.data.balance || 0);
@@ -56,7 +56,7 @@ const TransactionPage = () => {
         const token = localStorage.getItem('token'); // Retrieve token
 
         try {
-            const response = await axios.post('https://system-sq0t.onrender.com/api/transactions/create', {
+            const response = await axios.post('https://system-1wf6.onrender.com/api/transactions/create', {
                 type: popupType,
                 amount: numericAmount
             }, {
@@ -79,7 +79,7 @@ const TransactionPage = () => {
         const token = localStorage.getItem('token'); // Retrieve token
 
         try {
-            await axios.delete(`https://system-sq0t.onrender.com/api/transactions/${transactionId}`, {
+            await axios.delete(`https://system-1wf6.onrender.com/api/transactions/${transactionId}`, {
                 headers: { Authorization: `Bearer ${token}` } // Include token in headers
             });
             const response = await axios.get('https://system-sq0t.onrender.com/api/transactions/all', {
