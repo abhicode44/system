@@ -86,7 +86,7 @@ function Register() {
                     <div className="form-group">
                         <label>Username</label>
                         <input
-                            type="text"
+                            type="email"
                             name="username"
                             placeholder="Username"
                             value={formData.username}

@@ -84,7 +84,7 @@ const Login = () => {
                     </div>
                     <label className="login-label">Username</label>
                     <input 
-                        type="text" 
+                        type="email" 
                         className="login-input" 
                         placeholder="Username" 
                         value={username} 
