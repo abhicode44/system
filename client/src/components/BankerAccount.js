@@ -16,7 +16,7 @@ const BankerAccount = () => {
 
   // Fetch all users
   useEffect(() => {
-    axios.get('https://system-sq0t.onrender.com/api/users')
+    axios.get('https://system-1wf6.onrender.com/api/users')
       .then(response => {
         if (Array.isArray(response.data)) {
           setUsers(response.data);
@@ -35,7 +35,7 @@ const BankerAccount = () => {
     setSelectedUserName(user.username); // Set username
     const token = localStorage.getItem('token');
 
-    axios.get(`https://system-sq0t.onrender.com/api/users/${user._id}/transactions`, {
+    axios.get(`https://system-1wf6.onrender.com/api/users/${user._id}/transactions`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
