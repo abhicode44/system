@@ -31,7 +31,7 @@ function Register() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:5000/api/register', formData);
+            const response = await axios.post('https://system-sq0t.onrender.com/api/register', formData);
             alert(response.data.message);
         } catch (error) {
             alert(error.response?.data?.message || 'Registration failed');
